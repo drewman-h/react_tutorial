@@ -40,3 +40,17 @@
   .input_submit:hover {
     background-color: #388ae2;
   }
+
+  .input_submit:active {
+    transform: scale(0.8);
+    box-shadow: 0 0 5px black;
+  }
+
+  .todos {
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    width: 47.5%;
+    padding: 15px;
+    background-color: rgb(50, 195, 205);
+  }
