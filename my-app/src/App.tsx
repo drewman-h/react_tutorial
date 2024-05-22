@@ -27,7 +27,6 @@ const App: React.FC = () => {
       <TodoList todos={todos} setTodos={setTodos} />
     </div>
   );
-
 }
 
 export default App;
