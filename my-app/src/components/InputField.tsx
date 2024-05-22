@@ -27,4 +27,4 @@ const InputField = ({todo, setTodo, handleAdd}: Props) => {
     )
 }
 
-export default InputField;
+export default InputField
