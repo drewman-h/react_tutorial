@@ -46,6 +46,7 @@
     box-shadow: 0 0 5px black;
   }
 
+  /*
   .todos {
     border-radius: 5px;
     display: flex;
@@ -53,4 +54,12 @@
     width: 47.5%;
     padding: 15px;
     background-color: rgb(50, 195, 205);
+  }
+  */
+
+  .todos {
+    display: flex;
+    justify-content: space-evenly;
+    width: 90%;
+    flex-wrap: wrap;
   }
