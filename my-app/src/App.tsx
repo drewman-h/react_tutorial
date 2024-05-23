@@ -1,50 +1,56 @@
-import React, { useState } from 'react';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
 import InputField from "./components/InputField";
 import TodoList from "./components/TodoList";
+import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import { Todo } from "./model";
-import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 
 const App: React.FC = () => {
-
   const [todo, setTodo] = useState<string>("");
-  const [todos, setTodos] = useState<Todo[]>([]);
-  const [completedTodos, setCompletedTodos] = useState<Todo[]>([]);
+  const [todos, setTodos] = useState<Array<Todo>>([]);
+  const [CompletedTodos, setCompletedTodos] = useState<Array<Todo>>([]);
 
   const handleAdd = (e: React.FormEvent) => {
     e.preventDefault();
 
     if (todo) {
-      setTodos([...todos, {id:Date.now(), todo:todo, isDone: false}]);
+      setTodos([...todos, { id: Date.now(), todo, isDone: false }]);
       setTodo("");
     }
   };
 
   const onDragEnd = (result: DropResult) => {
-    const { source, destination } = result;
+    const { destination, source } = result;
 
     console.log(result);
 
-    if (!destination) return;
-    if (destination.droppableId===source.droppableId && destination.index===source.index) return;
+    if (!destination) {
+      return;
+    }
 
-    let add,
-    active = todos,
-    complete = completedTodos;
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    ) {
+      return;
+    }
 
-    if (source.droppableId === 'TodosList') {
+    let add;
+    let active = todos;
+    let complete = CompletedTodos;
+    // Source Logic
+    if (source.droppableId === "TodosList") {
       add = active[source.index];
       active.splice(source.index, 1);
-    }
-    else {
+    } else {
       add = complete[source.index];
       complete.splice(source.index, 1);
     }
 
-    if (destination.droppableId === 'TodosList') {
+    // Destination Logic
+    if (destination.droppableId === "TodosList") {
       active.splice(destination.index, 0, add);
-    }
-    else {
+    } else {
       complete.splice(destination.index, 0, add);
     }
 
@@ -58,14 +64,14 @@ const App: React.FC = () => {
         <span className="heading">Taskify</span>
         <InputField todo={todo} setTodo={setTodo} handleAdd={handleAdd} />
         <TodoList
-        todos={todos}
-        setTodos={setTodos}
-        completedTodos={completedTodos}
-        setCompletedTodos={setCompletedTodos}
+          todos={todos}
+          setTodos={setTodos}
+          CompletedTodos={CompletedTodos}
+          setCompletedTodos={setCompletedTodos}
         />
       </div>
     </DragDropContext>
   );
-}
+};
 
 export default App;
