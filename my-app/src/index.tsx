@@ -11,7 +11,8 @@ ReactDOM.render(
 );
 
 /*
-// this broke it
+// this broke drag and drop somehow
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
